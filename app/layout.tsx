@@ -1,16 +1,28 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import localFont from 'next/font/local'
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
+const chakraPetch = localFont({
+  src: [
+    {
+      path: '../public/frontendmentor/assets/fonts/chakra-petch/chakra-petch-semibold.ttf',
+      weight: '600',
+      style: 'normal',
+    },
+    {
+      path: '../public/frontendmentor/assets/fonts/chakra-petch/chakra-petch-bold.ttf',
+      weight: '800',
+      style: 'normal',
+    },
+  ],
+  variable: '--font-chakra-petch',
+})
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+const jetbrainsMono = localFont({
+  src: "../public/frontendmentor/assets/fonts/jetbrains-mono/jetbrains-mono-variable.ttf",
+  display: 'swap',
+  variable: '--font-jetbrains-mono',
+})
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -25,9 +37,15 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${chakraPetch.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col bg-background text-foreground">
+        <main className="flex flex-col flex-1 items-center justify-center font-sans">
+          <div className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 sm:items-start">
+            {children}
+          </div>
+        </main>
+      </body>
     </html>
   );
 }
